@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Speaking Mastery</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Moul&family=Moulpali&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/6881/6881481.png">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --font-normal: 'Kantumruy Pro', sans-serif;
+            --font-header: 'Moul', serif;
+            --font-model: 'Moulpali', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-normal);
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .language-toggle span {
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--primary-color);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--warning-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(12px);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: var(--font-model);
+            font-size: 1.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1412&q=80') no-repeat center center/cover;
+            position: relative;
+            margin-top: 70px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-header);
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: fit-content;
+            float: left;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        /* Features Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-family: var(--font-header);
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about {
+            background-color: #f5f7fa;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 50px;
+        }
+
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-content h2 {
+            font-family: var(--font-header);
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Testimonials */
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 0 15px;
+            text-align: center;
+        }
+
+        .testimonial-slide img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--accent-color);
+        }
+
+        .testimonial-slide p {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-slide h4 {
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+
+        .testimonial-slide .rating {
+            color: #ffc107;
+            font-size: 1rem;
+        }
+
+        /* Pricing */
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.popular .popular-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-card ul li {
+            padding: 10px 0;
+            color: #666;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        /* Contact */
+        .contact {
+            background-color: #f5f7fa;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .contact-info h3 {
+            font-family: var(--font-header);
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .contact-details div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-details i {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .contact-details span {
+            color: #666;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: var(--font-normal);
+            font-size: 1rem;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-col h3 {
+            font-family: var(--font-header);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-col p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .about-container {
+                flex-direction: column;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .hero-content .btn-outline {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .language-toggle {
+                bottom: 70px;
+                right: 10px;
+                padding: 3px 8px;
+            }
+
+            .toggle-switch {
+                width: 50px;
+                height: 25px;
+            }
+
+            .slider:before {
+                height: 19px;
+                width: 19px;
+            }
+
+            input:checked + .slider:before {
+                transform: translateX(25px);
+            }
+        }
+
+        /* Khmer Language Styles */
+        body.khmer {
+            font-family: var(--font-normal);
+        }
+
+        body.khmer .section-title h2,
+        body.khmer .hero-content h1,
+        body.khmer .about-content h2,
+        body.khmer .contact-info h3,
+        body.khmer .footer-col h3 {
+            font-family: var(--font-header);
+        }
+
+        /* Animation Styles */
+        [data-aos="fade-up"] {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        [data-aos="fade-up"].aos-animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        [data-aos="fade-left"] {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        [data-aos="fade-left"].aos-animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        [data-aos="fade-right"] {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        [data-aos="fade-right"].aos-animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        [data-aos="zoom-in"] {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.8s ease;
+        }
+
+        [data-aos="zoom-in"].aos-animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <span class="en">English</span>
+        <label class="toggle-switch">
+            <input type="checkbox" id="language-toggle">
+            <span class="slider"></span>
+        </label>
+        <span class="km">ខ្មែរ</span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/6881/6881481.png" alt="Public Speaking Logo">
+                <span class="en">Public Speaking</span>
+                <span class="km" style="display: none;">ការប្រកាសសាធារណៈ</span>
+            </div>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#home" class="en">Home</a><a href="#home" class="km" style="display: none;">ទំព័រដើម</a></li>
+                    <li><a href="#features" class="en">Features</a><a href="#features" class="km" style="display: none;">លក្ខណៈពិសេស</a></li>
+                    <li><a href="#about" class="en">About</a><a href="#about" class="km" style="display: none;">អំពីយើង</a></li>
+                    <li><a href="#testimonials" class="en">Testimonials</a><a href="#testimonials" class="km" style="display: none;">សាកល្បង</a></li>
+                    <li><a href="#pricing" class="en">Pricing</a><a href="#pricing" class="km" style="display: none;">តម្លៃ</a></li>
+                    <li><a href="#contact" class="en">Contact</a><a href="#contact" class="km" style="display: none;">ទំនាក់ទំនង</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 data-aos="fade-right" class="en">Master the Art of Public Speaking</h1>
+            <h1 data-aos="fade-right" class="km" style="display: none;">សិល្បៈនៃការប្រកាសសាធារណៈ</h1>
+            <p data-aos="fade-right" data-aos-delay="100" class="en">Transform your communication skills and speak with confidence in any situation. Our expert-led courses will help you overcome fear and deliver powerful presentations.</p>
+            <p data-aos="fade-right" data-aos-delay="100" class="km" style="display: none;">ផ្លាស់ប្តូរជំនាញទំនាក់ទំនងរបស់អ្នក និងនិយាយដោយភាពជ្រើសរើសក្នុងស្ថានភាពណាមួយ។ វគ្គសិក្សាដែលដឹកនាំដោយអ្នកជំនាញរបស់យើងនឹងជួយអ្នកយកឈ្នះការភ័យខ្លាច និងផ្តល់ការបង្ហាញដ៏មានឥទ្ធិពល។</p>
+            <div data-aos="fade-right" data-aos-delay="200">
+                <a href="#pricing" class="btn en">Get Started</a>
+                <a href="#pricing" class="btn km" style="display: none;">ចាប់ផ្តើម</a>
+                <a href="#contact" class="btn btn-outline en">Contact Us</a>
+                <a href="#contact" class="btn btn-outline km" style="display: none;">ទំនាក់ទំនង</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="section-title" data-aos="fade-up">
+            <h2 class="en">Why Choose Us</h2>
+            <h2 class="km" style="display: none;">ហេតុអ្វីជ្រើសរើសយើង</h2>
+            <p class="en">We provide the best public speaking training with proven techniques and personalized coaching.</p>
+            <p class="km" style="display: none;">យើងផ្តល់នូវការបណ្តុះបណ្តាលការប្រកាសសាធារណៈដ៏ល្អបំផុតជាមួយនឹងបច្ចេកទេសដែលបានបញ្ជាក់ និងការបណ្តុះបណ្តាលដែលបានប្តូរតាមបុគ្គល។</p>
+        </div>
+        <div class="features-container">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3 class="en">Expert Instructors</h3>
+                <h3 class="km" style="display: none;">គ្រូបង្រៀនជំនាញ</h3>
+                <p class="en">Learn from industry professionals with years of experience in public speaking and communication.</p>
+                <p class="km" style="display: none;">រៀនពីអ្នកជំនាញក្នុងឧស្សាហកម្មដែលមានបទពិសោធន៍ច្រើនឆ្នាំក្នុងការប្រកាសសាធារណៈ និងទំនាក់ទំនង។</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="en">Interactive Sessions</h3>
+                <h3 class="km" style="display: none;">សម័យអន្តរកម្ម</h3>
+                <p class="en">Engage in hands-on activities and real-world scenarios to practice your skills.</p>
+                <p class="km" style="display: none;">ចូលរួមក្នុងសកម្មភាពជាក់ស្តែង និងស្ថានភាពពិតប្រាកដដើម្បីអនុវត្តជំនាញរបស់អ្នក។</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h3 class="en">Certification</h3>
+                <h3 class="km" style="display: none;">វិញ្ញាបនបត្រ</h3>
+                <p class="en">Receive a recognized certification upon completion to boost your professional profile.</p>
+                <p class="km" style="display: none;">ទទួលបានវិញ្ញាបនបត្រដែលទទួលស្គាល់បន្ទាប់ពីបញ្ចប់ដើម្បីលើកកំពស់ប្រវត្តិរូបវិជ្ជាជីវៈរបស់អ្នក។</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="about-container">
+            <div class="about-img" data-aos="fade-right">
+                <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Public Speaking Training">
+            </div>
+            <div class="about-content" data-aos="fade-left">
+                <h2 class="en">About Our Program</h2>
+                <h2 class="km" style="display: none;">អំពីកម្មវិធីរបស់យើង</h2>
+                <p class="en">Our public speaking program is designed to help individuals at all levels overcome their fear of speaking in public and develop the confidence to deliver powerful presentations. Whether you're a beginner or an experienced speaker looking to refine your skills, our tailored approach will meet your needs.</p>
+                <p class="km" style="display: none;">កម្មវិធីប្រកាសសាធារណៈរបស់យើងត្រូវបានរចនាឡើងដើម្បីជួយបុគ្គលនៅគ្រប់កម្រិតយកឈ្នះការភ័យខ្លាចក្នុងការនិយាយនៅកន្លែងសាធារណៈ និងអភិវឌ្ឍភាពជ្រើសរើសក្នុងការផ្តល់ការបង្ហាញដ៏មានឥទ្ធិពល។ ទោះបីជាអ្នកជាអ្នកចាប់ផ្តើម ឬអ្នកនិយាយដែលមានបទពិសោធន៍ដែលចង់កែលម្អជំនាញរបស់អ្នកក៏ដោយ វិធីសាកល្បងដែលប្តូរតាមរបស់យើងនឹងបំពេញតម្រូវការរបស់អ្នក។</p>
+                <p class="en">We combine proven techniques with personalized feedback to ensure measurable improvement in your speaking abilities. Our small class sizes and supportive environment create the perfect setting for growth.</p>
+                <p class="km" style="display: none;">យើងបញ្ចូលបច្ចេកទេសដែលបានបញ្ជាក់ជាមួយនឹងមតិកែលម្អដែលបានប្តូរតាមបុគ្គល ដើម្បីធានាថាការកែលម្អអាចវាស់បាននៅក្នុងសមត្ថភាពនិយាយរបស់អ្នក។ ទំហំថ្នាក់តូចរបស់យើង និងបរិយាកាសគាំទ្របង្កើតបាននូវការកំណត់ដ៏ល្អបំផុតសម្រាប់ការលូតលាស់។</p>
+                <a href="#contact" class="btn en">Learn More</a>
+                <a href="#contact" class="btn km" style="display: none;">រៀនបន្ថែម</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section" id="testimonials">
+        <div class="section-title" data-aos="fade-up">
+            <h2 class="en">What Our Students Say</h2>
+            <h2 class="km" style="display: none;">អ្វីដែលសិស្សានុសិស្សរបស់យើងនិយាយ</h2>
+            <p class="en">Hear from individuals who transformed their public speaking skills with our program.</p>
+            <p class="km" style="display: none;">ស្តាប់ពីបុគ្គលដែលបានផ្លាស់ប្តូរជំនាញប្រកាសសាធារណៈរបស់ពួកគេជាមួយនឹងកម្មវិធីរបស់យើង។</p>
+        </div>
+        <div class="testimonials-container">
+            <div class="testimonial-slider">
+                <div class="testimonial-slide" data-aos="zoom-in">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Student">
+                    <p class="en">"This program completely changed how I approach public speaking. I went from being terrified to actually enjoying presentations!"</p>
+                    <p class="km" style="display: none;">"កម្មវិធីនេះបានផ្លាស់ប្តូរទាំងស្រុងអំពីរបៀបដែលខ្ញុំចូលទៅជិតការប្រកាសសាធារណៈ។ ខ្ញុំបានផ្លាស់ប្តូរពីការភ័យខ្លាចទៅជាការរីករាយពិតប្រាកដជាមួយនឹងការបង្ហាញ!"</p>
+                    <h4>Sophia Chen</h4>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-slide" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Student">
+                    <p class="en">"The personalized feedback and practical exercises made all the difference in my confidence level when speaking to groups."</p>
+                    <p class="km" style="display: none;">"មតិកែលម្អដែលបានប្តូរតាមបុគ្គល និងលំហាត់អនុវត្តបានធ្វើឱ្យមានភាពខុសគ្នាទាំងអស់នៅក្នុងកម្រិតភាពជ្រើសរើសរបស់ខ្ញុំនៅពេលនិយាយទៅកាន់ក្រុម។"</p>
+                    <h4>James Wilson</h4>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                <div class="testimonial-slide" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Student">
+                    <p class="en">"I used to avoid speaking opportunities at work. Now I volunteer for them thanks to the skills I gained here."</p>
+                    <p class="km" style="display: none;">"ខ្ញុំធ្លាប់ជៀសវាងឱកាសនិយាយនៅកន្លែងធ្វើការ។ ឥឡូវនេះខ្ញុំស្ម័គ្រចិត្តសម្រាប់ពួកគេដោយសារតែជំនាញដែលខ្ញុំបានទទួលនៅទីនេះ។"</p>
+                    <h4>Maria Garcia</h4>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section" id="pricing">
+        <div class="section-title" data-aos="fade-up">
+            <h2 class="en">Our Pricing Plans</h2>
+            <h2 class="km" style="display: none;">ផែនការតម្លៃរបស់យើង</h2>
+            <p class="en">Choose the plan that fits your needs and start your journey to confident public speaking today.</p>
+            <p class="km" style="display: none;">ជ្រើសរើសផែនការដែលសមនឹងតម្រូវការរបស់អ្នក និងចាប់ផ្តើមដំណើរទៅកាន់ការប្រកាសសាធារណៈដែលមានភាពជ្រើសរើសនៅថ្ងៃនេះ។</p>
+        </div>
+        <div class="pricing-container">
+            <div class="pricing-card" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="en">Basic</h3>
+                <h3 class="km" style="display: none;">មូលដ្ឋាន</h3>
+                <div class="price">$99<span class="en">/month</span><span class="km" style="display: none;">/ខែ</span></div>
+                <ul>
+                    <li class="en">4 Group Sessions</li>
+                    <li class="km" style="display: none;">៤ សម័យក្រុម</li>
+                    <li class="en">1 Feedback Session</li>
+                    <li class="km" style="display: none;">១ សម័យមតិកែលម្អ</li>
+                    <li class="en">Access to Online Materials</li>
+                    <li class="km" style="display: none;">ការចូលប្រើសម្ភារៈអនឡាញ</li>
+                    <li class="en">Email Support</li>
+                    <li class="km" style="display: none;">ការគាំទ្រតាមអ៊ីមែល</li>
+                </ul>
+                <a href="#contact" class="btn en">Get Started</a>
+                <a href="#contact" class="btn km" style="display: none;">ចាប់ផ្តើម</a>
+            </div>
+            <div class="pricing-card popular" data-aos="fade-up" data-aos-delay="200">
+                <div class="popular-badge en">Popular</div>
+                <div class="popular-badge km" style="display: none;">ពេញនិយម</div>
+                <h3 class="en">Professional</h3>
+                <h3 class="km" style="display: none;">វិជ្ជាជីវៈ</h3>
+                <div class="price">$199<span class="en">/month</span><span class="km" style="display: none;">/ខែ</span></div>
+                <ul>
+                    <li class="en">8 Group Sessions</li>
+                    <li class="km" style="display: none;">៨ សម័យក្រុម</li>
+                    <li class="en">4 Feedback Sessions</li>
+                    <li class="km" style="display: none;">៤ សម័យមតិកែលម្អ</li>
+                    <li class="en">2 Private Coaching</li>
+                    <li class="km" style="display: none;">២ ការបណ្តុះបណ្តាលឯកជន</li>
+                    <li class="en">Priority Support</li>
+                    <li class="km" style="display: none;">ការគាំទ្រអាទិភាព</li>
+                </ul>
+                <a href="#contact" class="btn en">Get Started</a>
+                <a href="#contact" class="btn km" style="display: none;">ចាប់ផ្តើម</a>
+            </div>
+            <div class="pricing-card" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="en">Premium</h3>
+                <h3 class="km" style="display: none;">វណ្ណយុត្តិ</h3>
+                <div class="price">$299<span class="en">/month</span><span class="km" style="display: none;">/ខែ</span></div>
+                <ul>
+                    <li class="en">Unlimited Group Sessions</li>
+                    <li class="km" style="display: none;">សម័យក្រុមគ្មានដែនកំណត់</li>
+                    <li class="en">Weekly Feedback</li>
+                    <li class="km" style="display: none;">មតិកែលម្អប្រចាំសប្តាហ៍</li>
+                    <li class="en">8 Private Coaching</li>
+                    <li class="km" style="display: none;">៨ ការបណ្តុះបណ្តាលឯកជន</li>
+                    <li class="en">24/7 Support</li>
+                    <li class="km" style="display: none;">ការគាំទ្រ២៤/៧</li>
+                </ul>
+                <a href="#contact" class="btn en">Get Started</a>
+                <a href="#contact" class="btn km" style="display: none;">ចាប់ផ្តើម</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="section-title" data-aos="fade-up">
+            <h2 class="en">Get In Touch</h2>
+            <h2 class="km" style="display: none;">ទាក់ទងយើង</h2>
+            <p class="en">Have questions? We'd love to hear from you. Contact us today to learn more about our programs.</p>
+            <p class="km" style="display: none;">មានសំណួរទេ? យើងចង់ស្តាប់ពីអ្នក។ ទាក់ទងមកយើងថ្ងៃនេះដើម្បីរៀនបន្ថែមអំពីកម្មវិធីរបស់យើង។</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info" data-aos="fade-right">
+                <h3 class="en">Contact Information</h3>
+                <h3 class="km" style="display: none;">ព័ត៌មានទំនាក់ទំនង</h3>
+                <p class="en">Fill out the form or reach out to us directly using the contact information below.</p>
+                <p class="km" style="display: none;">បំពេញទម្រង់ ឬទាក់ទងមកយើងដោយផ្ទាល់ដោយប្រើព័ត៌មានទំនាក់ទំនងខាងក្រោម។</p>
+                <div class="contact-details">
+                    <div>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="en">123 Speaking St, Phnom Penh, Cambodia</span>
+                        <span class="km" style="display: none;">១២៣ ផ្លូវស្តីបន្ទោស, ភ្នំពេញ, កម្ពុជា</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+855 12 345 678</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-envelope"></i>
+                        <span>info@publicspeakingkh.com</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="contact-form" data-aos="fade-left">
+                <form>
+                    <div class="form-group">
+                        <input type="text" placeholder="Name" class="en" required>
+                        <input type="text" placeholder="ឈ្មោះ" class="km" style="display: none;" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" class="en" required>
+                        <input type="email" placeholder="អ៊ីមែល" class="km" style="display: none;" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject" class="en" required>
+                        <input type="text" placeholder="ប្រធានបទ" class="km" style="display: none;" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Message" class="en" required></textarea>
+                        <textarea placeholder="សារ" class="km" style="display: none;" required></textarea>
+                    </div>
+                    <button type="submit" class="btn en">Send Message</button>
+                    <button type="submit" class="btn km" style="display: none;">ផ្ញើសារ</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3 class="en">Public Speaking</h3>
+                <h3 class="km" style="display: none;">ការប្រកាសសាធារណៈ</h3>
+                <p class="en">Master the art of public speaking and transform your communication skills with our expert-led programs.</p>
+                <p class="km" style="display: none;">សិក្សាសិល្បៈនៃការប្រកាសសាធារណៈ និងផ្លាស់ប្តូរជំនាញទំនាក់ទំនងរបស់អ្នកជាមួយនឹងកម្មវិធីដែលដឹកនាំដោយអ្នកជំនាញរបស់យើង។</p>
+            </div>
+            <div class="footer-col">
+                <h3 class="en">Quick Links</h3>
+                <h3 class="km" style="display: none;">តំណភ្ជាប់រហ័ស</h3>
+                <ul>
+                    <li><a href="#home" class="en">Home</a><a href="#home" class="km" style="display: none;">ទំព័រដើម</a></li>
+                    <li><a href="#features" class="en">Features</a><a href="#features" class="km" style="display: none;">លក្ខណៈពិសេស</a></li>
+                    <li><a href="#about" class="en">About</a><a href="#about" class="km" style="display: none;">អំពីយើង</a></li>
+                    <li><a href="#pricing" class="en">Pricing</a><a href="#pricing" class="km" style="display: none;">តម្លៃ</a></li>
+                    <li><a href="#contact" class="en">Contact</a><a href="#contact" class="km" style="display: none;">ទំនាក់ទំនង</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="en">Programs</h3>
+                <h3 class="km" style="display: none;">កម្មវិធី</h3>
+                <ul>
+                    <li><a href="#" class="en">Beginner Course</a><a href="#" class="km" style="display: none;">វគ្គសម្រាប់អ្នកចាប់ផ្តើម</a></li>
+                    <li><a href="#" class="en">Advanced Training</a><a href="#" class="km" style="display: none;">ការបណ្តុះបណ្តាលកម្រិតខ្ពស់</a></li>
+                    <li><a href="#" class="en">Corporate Workshops</a><a href="#" class="km" style="display: none;">សិក្ខាសាលាក្រុមហ៊ុន</a></li>
+                    <li><a href="#" class="en">One-on-One Coaching</a><a href="#" class="km" style="display: none;">ការបណ្តុះបណ្តាលមួយទល់មួយ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="en">Newsletter</h3>
+                <h3 class="km" style="display: none;">ព័ត៌មានប្រចាំខែ</h3>
+                <p class="en">Subscribe to our newsletter for tips and updates on public speaking.</p>
+                <p class="km" style="display: none;">ជាវព័ត៌មានប្រចាំខែរបស់យើងសម្រាប់គន្លឹះ និងព័ត៌មានអំពីការប្រកាសសាធារណៈ។</p>
+                <form>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" class="en" required>
+                        <input type="email" placeholder="អ៊ីមែលរបស់អ្នក" class="km" style="display: none;" required>
+                    </div>
+                    <button type="submit" class="btn en">Subscribe</button>
+                    <button type="submit" class="btn km" style="display: none;">ជាវ</button>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p class="en">2025 - All rights reserved. Provide by Mr. Phekdey PHORN</p>
+            <p class="km" style="display: none;">2025 - រក្សារ​សិទ្ធិ​គ្រប់​យ៉ាង ដោយលោក ផន ភក្ដី។</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animation
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Back to top button
+        const backToTopBtn = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('active');
+            } else {
+                backToTopBtn.classList.remove('active');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Language toggle functionality
+        const languageToggle = document.getElementById('language-toggle');
+        const englishElements = document.querySelectorAll('.en');
+        const khmerElements = document.querySelectorAll('.km');
+
+        languageToggle.addEventListener('change', function() {
+            if (this.checked) {
+                // Switch to Khmer
+                englishElements.forEach(el => el.style.display = 'none');
+                khmerElements.forEach(el => el.style.display = 'block');
+                document.body.classList.add('khmer');
+            } else {
+                // Switch to English
+                englishElements.forEach(el => el.style.display = 'block');
+                khmerElements.forEach(el => el.style.display = 'none');
+                document.body.classList.remove('khmer');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+    </script>
+</body>
+</html>
